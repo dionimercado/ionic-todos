@@ -33,7 +33,8 @@
   
   </ion-list>
   <div padding>
-    <button ion-button block (click)="addTodo()">Save Changes</button>
+    <button ion-button block (click)="saveTodo()">Save Changes</button>
+    <button *ngIf="id != 0" ion-button block (click)="deleteTodo()" color="danger">Delete Todo</button>
   </div>
 
 </ion-content>

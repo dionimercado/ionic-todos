@@ -23,9 +23,17 @@ export class TodosService {
     }
 
     public editTodo(todo) {
-        for( let i; i < this.todos.length; i++) {
+        for( let i=0; i < this.todos.length; i++) {
             if(this.todos[i].id == todo.id) {
                 this.todos[i] = todo;
+            }
+        }
+    }
+
+    public deleteTodo(todo) {
+        for( let i=0; i < this.todos.length; i++) {
+            if(this.todos[i].id == todo.id) {
+                this.todos.splice(i, 1);
             }
         }
     }

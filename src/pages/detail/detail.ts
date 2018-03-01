@@ -24,7 +24,7 @@ export class DetailPage {
     console.log('ionViewDidLoad DetailPage');
   }
 
-  public addTodo() {
+  public saveTodo() {
     if( this.id != 0) {
       this.TodosService.editTodo(this.todo);
       alert('Changes successfully saved!')
@@ -34,6 +34,12 @@ export class DetailPage {
       alert('Todo successfully added!')
     }
 
+    this.navCtrl.pop();
+  }
+
+  public deleteTodo() {
+    this.TodosService.deleteTodo(this.todo);
+    alert('This todo has been deleted');
     this.navCtrl.pop();
   }
 
