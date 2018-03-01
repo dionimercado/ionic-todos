@@ -15,11 +15,20 @@ export class DetailPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public TodosService : TodosService) {
     this.id = navParams.get('id');
-    this.todo = TodosService.getTodo(this.id);
+    if( this.id != 0 ) {
+      this.todo = TodosService.getTodo(this.id);
+    }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetailPage');
+  }
+
+  public addTodo() {
+    this.todo.id = Date.now();
+    this.TodosService.createTodo(this.todo);
+    alert('Todo successfully added!')
+    this.navCtrl.pop();
   }
 
 }

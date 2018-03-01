@@ -17,4 +17,8 @@ export class TodosService {
     public getTodo(id) {
         return this.todos.filter(function(e, i) { return e.id == id })[0] || { id: null, name: null, description: null, status: 'pending' };
     }
+
+    public createTodo(note) {
+        this.todos.push(note)
+    }
 }
