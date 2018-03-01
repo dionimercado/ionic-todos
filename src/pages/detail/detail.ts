@@ -25,9 +25,15 @@ export class DetailPage {
   }
 
   public addTodo() {
-    this.todo.id = Date.now();
-    this.TodosService.createTodo(this.todo);
-    alert('Todo successfully added!')
+    if( this.id != 0) {
+      this.TodosService.editTodo(this.todo);
+      alert('Changes successfully saved!')
+    }else{
+      this.todo.id = Date.now();
+      this.TodosService.createTodo(this.todo);
+      alert('Todo successfully added!')
+    }
+
     this.navCtrl.pop();
   }
 

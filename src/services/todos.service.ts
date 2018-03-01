@@ -18,7 +18,15 @@ export class TodosService {
         return this.todos.filter(function(e, i) { return e.id == id })[0] || { id: null, name: null, description: null, status: 'pending' };
     }
 
-    public createTodo(note) {
-        this.todos.push(note)
+    public createTodo(todo) {
+        this.todos.push(todo)
+    }
+
+    public editTodo(todo) {
+        for( let i; i < this.todos.length; i++) {
+            if(this.todos[i].id == todo.id) {
+                this.todos[i] = todo;
+            }
+        }
     }
 }
