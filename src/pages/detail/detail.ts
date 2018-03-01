@@ -10,14 +10,21 @@ import { TodosService } from '../../services/todos.service';
 })
 export class DetailPage {
 
-  todo = { id: null, name: null, description: null, status: 'pending' }
+  todo:any = { id: null, name: null, description: null, status: 'pending' }
   id = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public TodosService : TodosService) {
+    // this.id = navParams.get('id');
+    // if( this.id != 0 ) {
+    //   this.todo = TodosService.getTodo(this.id);
+    // }
     this.id = navParams.get('id');
-    if( this.id != 0 ) {
-      this.todo = TodosService.getTodo(this.id);
-    }
+    if(this.id != 0){
+      TodosService.getTodo(this.id)
+        .valueChanges().subscribe(todo =>{
+          console.log(todo)          
+          this.todo = todo});
+    };
   }
 
   ionViewDidLoad() {
@@ -31,7 +38,7 @@ export class DetailPage {
     }else{
       this.todo.id = Date.now();
       this.TodosService.createTodo(this.todo);
-      alert('Todo successfully added!')
+      alert('Todo successfully added!');
     }
 
     this.navCtrl.pop();

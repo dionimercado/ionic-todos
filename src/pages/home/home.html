@@ -10,7 +10,7 @@
   <ion-list>
     <button ion-item *ngFor="let todo of todos" (click)="goToDetail(todo.id)">
       {{ todo.name }}
-    </button>  
+    </button>
   </ion-list>
   <div padding>
     <button ion-button block (click)="createTodo()">Create Todo</button>

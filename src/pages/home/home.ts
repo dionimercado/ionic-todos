@@ -11,8 +11,12 @@ export class HomePage {
   @ViewChild('myNav') nav: NavController
 
   todos = [];
-  constructor(public navCtrl: NavController, public todosService : TodosService ) {
-    this.todos = todosService.getTodos();
+
+  constructor(public navCtrl: NavController, public TodosService : TodosService ) {
+    TodosService.getTodos()
+      .valueChanges().subscribe(todos => {
+        this.todos = todos
+      });
   }
 
   public goToDetail(id) {

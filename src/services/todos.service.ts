@@ -1,40 +1,45 @@
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 
 export class TodosService {
-    todos = [
-        {id: 1, name: 'Learn Ionic basics', description: 'Bla bla bla 1', status: 'pending'},
-        {id: 2, name: 'Do my final project', description: 'Bla bla bla 2', status: 'pending'},
-        {id: 3, name: 'Take my exam', description: 'Bla bla bla 3', status: 'pending'},
-        {id: 4, name: 'Have a code review with Jarec', description: 'Bla bla bla 4', status: 'pending'}
-    ];
+    constructor( public afDB: AngularFireDatabase) {
+        
+    }
+    todos = [];
 
     public getTodos() {
-        return this.todos;
+        // return this.todos;
+        return this.afDB.list('todos/')
     }
 
     public getTodo(id) {
-        return this.todos.filter(function(e, i) { return e.id == id })[0] || { id: null, name: null, description: null, status: 'pending' };
+        // return this.todos.filter(function(e, i) { return e.id == id })[0] || { id: null, name: null, description: null, status: 'pending' };
+        return this.afDB.object('todos/'+id)
+
     }
 
     public createTodo(todo) {
-        this.todos.push(todo)
+        this.afDB.database.ref('todos/'+todo.id).set(todo);
+        // this.todos.push(todo);
     }
 
     public editTodo(todo) {
-        for( let i=0; i < this.todos.length; i++) {
-            if(this.todos[i].id == todo.id) {
-                this.todos[i] = todo;
-            }
-        }
+        // for( let i=0; i < this.todos.length; i++) {
+        //     if(this.todos[i].id == todo.id) {
+        //         this.todos[i] = todo;
+        //     }
+        // }
+        this.afDB.database.ref('todos/'+todo.id).set(todo);
     }
 
     public deleteTodo(todo) {
-        for( let i=0; i < this.todos.length; i++) {
-            if(this.todos[i].id == todo.id) {
-                this.todos.splice(i, 1);
-            }
-        }
+        // for( let i=0; i < this.todos.length; i++) {
+        //     if(this.todos[i].id == todo.id) {
+        //         this.todos.splice(i, 1);
+        //     }
+        // }
+        this.afDB.database.ref('todos/'+todo.id).remove();
     }
 }
